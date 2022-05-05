@@ -1,7 +1,9 @@
 <template>
   <nav>
     <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link :to="{ name: 'tasks'}">tasks</router-link> |
+    <router-link :to="{ name: 'register'}">register</router-link> |
+    <router-link :to="{ name: 'newtask'}">newtask</router-link>
   </nav>
   <router-view/>
 </template>
