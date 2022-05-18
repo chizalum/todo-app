@@ -1,25 +1,48 @@
 <template>
 <div>
-    <div class="sidebar">
-      <h3 id="task">TaskMe</h3>
-      <hr class="rule">
-      <h4 id="second">Tasks</h4>
-      <h4 id="add">Add new Task</h4>
-      <hr class="horizontal">
-      <hr class="bottom">
-      <p id="favour">Favour Felix</p>
-    </div>
     <h1 id="new">Add New Task</h1>
     <hr class="top">
-    <input type="text" placeholder="What is the name of your task?" id="in">
+    <input type="text" placeholder="What is the name of your task?" id="in" v-model="task">
     <hr class="first">
     <h3 id="ongoing">Task is ongoing</h3>
     <hr class="next">
-    <button id="btn"> <span id="reg">REGISTER </span></button>
+    <button id="btn" @click="submitTask"> <span id="reg">REGISTER </span></button>
+    <img src="@/assets/tick.png" alt="" id="ticker">
   </div>
 </template>
 
+<script>
+
+export default {
+  props: ['task', 'tasks'],
+  data(){
+    return{
+      editedTask: null,
+    }
+  },
+
+  methods: {
+    submitTask(){
+      if(this.task.length === 0) return;
+      
+      if(this.editedTask === null){
+        this.tasks.push({
+          name: this.task,
+          status: 'In-Progress'
+        });
+        }else{
+          this.tasks[this.editedTask].name =this.task;
+          this.editedTask = null;
+        }
+          this.task = ' ';
+    },
+  }
+}
+</script>
+
+
 <style scoped>
+
 body{ 
 margin: 0 !important; 
 padding: 0 !important;
@@ -54,7 +77,7 @@ position: absolute;
 width: 236px;
 left: 1px;
 top: 70px;
-border: 2px solid #B60000;
+border: 1px solid #B60000;
 }
 
 hr.horizontal{
@@ -62,7 +85,7 @@ position: absolute;
 width: 236px;
 left: 1px;
 top: 177px;
-border: 2px solid #B60000;
+border: 1px solid #B60000;
 }
 
 hr.bottom{
@@ -70,7 +93,7 @@ position: absolute;
 width: 236px;
 left: 1px;
 bottom: 52px;
-border: 2px solid #B60000;
+border: 1px solid #B60000;
 }
 
 #second{
@@ -165,7 +188,7 @@ top: 70px;
 left: 271px;
 width: 535px;
 height: 0px;
-border: 2px solid #FAFAFA;
+border: 1px solid #FAFAFA;
 }
 
 hr.first{
@@ -173,7 +196,7 @@ position: absolute;
 top: 141px;
 left: 273px;
 width: 538px;
-border: 2px solid #B60000;
+border: 1px solid #B60000;
 }
 
 hr.next{
@@ -181,7 +204,7 @@ position: absolute;
 top: 193px;
 left: 273px;
 width: 538px;
-border: 2px solid #B60000;
+border: 1px solid #B60000;
 }
 
 #btn{
@@ -204,6 +227,14 @@ font-weight: 700;
 font-size: 13.4892px;
 line-height: 18px;
 color: #FAFAFA;
+}
+
+#ticker{
+position: absolute;
+width: 18px;
+height: 7px;
+top: 164px;
+left: 17px;
 }
 </style>
 

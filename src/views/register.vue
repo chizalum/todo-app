@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <h1 id="task">TaskMe</h1>
+    <h1 id="task">Task<span id="me">Me</span></h1>
     <div class="box">
       <input type="text" placeholder="password" id="password">
       <div class="inline">
@@ -8,7 +8,11 @@
       <input type="text" placeholder="password" id="password2">
       </div>
       <input type="text" placeholder="password" id="password3">
-      <button id="register"> <span id="reg">REGISTER</span> </button>
+      <div id="register">
+      <div id="reggy">
+      <router-link :to="{ name: 'thetasks'}" tag="button" id="reg" style="text-decoration: inherit;" ><span >REGISTER</span></router-link>
+      </div>
+      </div>
     </div>
   </div>
 </template>
@@ -18,6 +22,10 @@
 </script>
 
 <style scoped>
+#me{
+color: #B60000;  
+}
+
 .box{
 position: absolute;
 width: 632px;
@@ -103,18 +111,23 @@ margin-right: 36px;
 margin-top: 26.02px;
 background: #B60000;
 border-radius: 2.99759px;
+text-align: center;
 }
 
 #reg{
 width: 68.86px;
 height: 16px;
-left: 391.14px;
-top: 335px;
+margin-left: 252.14;
 font-family: 'Segoe UI';
 font-style: normal;
 font-weight: 700;
 font-size: 13.4892px;
 line-height: 18px;
 color: #FAFAFA;
+margin-top: 7px;
+}
+
+#reggy{
+  padding-top: 5px;
 }
 </style>

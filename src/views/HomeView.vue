@@ -1,25 +1,42 @@
 <template>
   <div>
      <div>
-    <h1 id="task">TaskMe</h1>
+    <h1 id="task">Task<span id="me">Me</span></h1>
     <div class="box">
-    <input type="text" placeholder="Username" id="username">
-    <input type="text" placeholder="Password" id="password">
-    <p id="register">Register as a new user</p>
+    <input type="text" placeholder="Username" id="username" v-model="username">
+    <input type="text" placeholder="Password" id="password" @keyup.enter="move">
+    <div class="register">
+    <router-link :to="{ name: 'register'}" tag="text" style="text-decoration: inherit; color: inherit;">Register as a new user</router-link>
+    </div>
     </div>
   </div>
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'HomeView',
-  components: {}
-}
+
+  components: {},
+
+  data(){
+    return {
+    }
+  },
+
+  methods: {
+    move: function() {
+      console.log("yuhh") 
+    },
+  }
+};
+
 </script>
 
 <style scoped>
+#me{
+color: #B60000;  
+}
 
 #task{
 position: absolute;
@@ -71,19 +88,18 @@ margin-left: 50.92px;
 margin-top: 26.98px;
 }
 
-#register{
+.register{
 width: 113px;
 height: 16px;
+margin-left: 135px;
+margin-top: 63.42px;
 font-family: 'Segoe UI';
 font-style: normal;
 font-weight: 300;
 font-size: 12px;
 line-height: 16px;
 color: #000000;
-margin-right: 135px;
-margin-left: 135px;
-margin-top: 63.42px;
-margin-bottom: 34px;
-
 }
+
+
 </style>

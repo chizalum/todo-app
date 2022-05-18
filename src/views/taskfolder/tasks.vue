@@ -1,43 +1,53 @@
 <template>
   <div>
-    <div>
-    <div class="sidebar">
-      <h3 id="task">TaskMe</h3>
-      <hr class="rule">
-      <h4 id="second">Tasks</h4>
-      <h4 id="add">Add new Task</h4>
-      <hr class="horizontal">
-      <hr class="bottom">
-      <h4 id="favour">Favour Felix</h4>
-    </div>
     <h3 id="third">Tasks</h3>
-    <div class="box">
-      <h4 id="brush">Brush my hair</h4>
-      <h4 class="status" id="stat1">Status: In-Progress</h4>
-      <div class="progress">
+    <ul class="container">
+    <li v-for="(task, index) in tasks" :key="index" class="box">
+      <h4 id="brush">{{task.name}}</h4>
+      <h4 class="status" id="stat1">Status: {{task.status}}</h4>
+      <div class="progress"  @click="updateStatus(index)">
         <h4 class="move">In-progress</h4>
       </div>
-      <div class="done">
+      <div class="done" @click="changeStatus(index)">
         <h4 class="finished">Done</h4>
       </div>
-      <h4 id="delete">Delete</h4>
-    </div>
-    <div class="box2">
-      <h4 id="brush">Wash my hair</h4>
-      <h4 class="status" id="stat1">Status: Done   </h4>
-      <div class="progress">
-        <h4 class="move">In-progress</h4>
-      </div>
-      <div class="done">
-        <h4 class="finished">Done</h4>
-      </div>
-      <h4 id="delete">Delete</h4>
-    </div>
-  </div>
+      <h4 id="delete" @click="deleteTask(index)">Delete</h4>
+    </li>
+    </ul>
+    <img src="@/assets/tick.png" alt="" id="tick">
   </div>
 </template>
 
+<script>
+export default {
+  props: [
+    'tasks'
+  ],
+  data() {
+    return {
+    }
+  },
+
+  methods: {
+    deleteTask(index){
+      this.tasks.splice(index, 1);
+    },
+    updateStatus(index){
+      this.tasks[index].status = "In-Progress"
+    },
+    changeStatus(index){
+      this.tasks[index].status = "Done"
+    }
+  }
+}
+</script>
+
 <style scoped>
+
+ul{
+  list-style-type: none;
+  padding: 0;
+}
 
 .sidebar{
 width: 241px;
@@ -151,15 +161,20 @@ line-height: 28px;
 color: #000000;
 }
 
-.box{
+.container{
 position: absolute;
-width: 539px;
-height: 128px;
 left: 271px;
 top: 104px;
+width: auto;
+}
+
+.box{
+width: 539px;
+height: 128px;
 background: #FFFFFF;
 box-shadow: 0px 4px 4px -1px rgba(0, 0, 0, 0.25);
 border-radius: 11.9904px;
+margin-bottom: 15px;
 }
 
 #brush{
@@ -176,7 +191,7 @@ line-height: 22px;
 color: #756B6B;
 }
 
-#stat1{
+.status{
 position: absolute;
 width: 126px;
 height: 16px;
@@ -188,6 +203,7 @@ font-weight: 700;
 font-size: 12px;
 line-height: 14px;
 color: #B60000;
+white-space: nowrap;
 }
 
 .progress{
@@ -197,6 +213,7 @@ height: 34px;
 margin-left: 333px;
 margin-top: 30px;
 background: linear-gradient(0deg, #FFCFCF, #FFCFCF), #FFCFCF;
+cursor: pointer;
 }
 
 .move{
@@ -220,6 +237,7 @@ height: 34px;
 margin-left: 430px;
 margin-top: 30px;
 background: linear-gradient(0deg, #B60000, #B60000), #FFCFCF;
+cursor: pointer;
 }
 
 .finished{
@@ -248,6 +266,7 @@ font-weight: 700;
 font-size: 12px;
 line-height: 14px;
 color: #756B6B;
+cursor: pointer;
 }
 
 .box2{
@@ -259,5 +278,13 @@ top: 247px;
 background: #FFFFFF;
 box-shadow: 0px 4px 4px -1px rgba(0, 0, 0, 0.25);
 border-radius: 11.9904px;
+}
+
+#tick{
+position: fixed;
+width: 18px;
+height: 7px;
+top: 113px;
+left: 17px;
 }
 </style>
